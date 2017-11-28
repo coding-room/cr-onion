@@ -1,4 +1,4 @@
-package cr.onion;
+package cr.onion.web;
 
 import cr.onion.common.ResponseMO;
 import cr.onion.common.exception.OnionException;
