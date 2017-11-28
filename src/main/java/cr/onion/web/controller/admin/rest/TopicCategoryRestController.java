@@ -29,12 +29,8 @@ public class TopicCategoryRestController {
         return ResponseUtils.success();
     }
 
-    @PutMapping
-    public ResponseMO update(@RequestBody @Valid TopicCategoryMO categoryMO) {
-        String id = categoryMO.getId();
-        if (StringUtils.isEmpty(id)) {
-            return ResponseUtils.error("id不能为空");
-        }
+    @PutMapping("/{id}")
+    public ResponseMO update(@RequestBody @Valid TopicCategoryMO categoryMO, @PathVariable("id") String id) {
         TopicCategory category = topicCategoryAutoRepo.findOne(id);
         if (category == null) {
             return ResponseUtils.error("记录不存在");

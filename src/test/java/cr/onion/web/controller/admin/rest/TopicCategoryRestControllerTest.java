@@ -51,18 +51,17 @@ public class TopicCategoryRestControllerTest extends BaseControllerTest {
         List<TopicCategory> topicCategories = topicCategoryAutoRepo.findAll();
         TopicCategory category = topicCategories.get(0);
         TopicCategoryMO topicCategoryMO = new TopicCategoryMO();
-        topicCategoryMO.setId(category.getId());
         topicCategoryMO.setName("分类名字22");
         topicCategoryMO.setSort(2);
 
-        mockMvc.perform(MockUtils.populatePutBuilder("/admin/topicCategory", topicCategoryMO))
+        mockMvc.perform(MockUtils.populatePutBuilder("/admin/topicCategory/" + category.getId(), topicCategoryMO))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.code").value("0"));
 
         topicCategories = topicCategoryAutoRepo.findAll();
         Assert.assertEquals(1, topicCategories.size());
         category = topicCategories.get(0);
-        Assert.assertEquals(category.getId(), topicCategoryMO.getId());
+        Assert.assertEquals(category.getId(), category.getId());
         Assert.assertEquals(category.getName(), topicCategoryMO.getName());
         Assert.assertEquals(category.getSort(), topicCategoryMO.getSort());
     }
