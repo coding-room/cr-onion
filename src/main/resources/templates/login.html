@@ -1,0 +1,149 @@
+<!doctype html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1">
+    <title>Onion</title>
+
+    <!-- Set render engine for 360 browser -->
+    <meta name="renderer" content="webkit">
+
+    <!-- No Baidu Siteapp-->
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+
+    <link rel="icon" type="image/png" href="../static/plugins/amazeui/i/favicon.png">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="../static/plugins/amazeui/i/app-icon72x72@2x.png">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Amaze UI"/>
+    <link rel="apple-touch-icon-precomposed" href="../static/plugins/amazeui/i/app-icon72x72@2x.png">
+
+    <!-- Tile icon for Win8 (144x144 + tile color) -->
+    <meta name="msapplication-TileImage" content="assets/i/app-icon72x72@2x.png">
+    <meta name="msapplication-TileColor" content="#0e90d2">
+
+    <link rel="stylesheet" href="../static/plugins/amazeui/css/amazeui.min.css">
+    <link rel="stylesheet" href="../static/plugins/amazeui/css/app.css">
+</head>
+<body>
+<header class="am-topbar am-topbar-inverse">
+    <div class="container">
+        <h1 class="am-topbar-brand">
+            <a href="#">Onion</a>
+        </h1>
+        <button class="am-topbar-btn am-topbar-toggle am-btn am-btn-sm am-btn-success am-show-sm-only"
+                data-am-collapse="{target: '#doc-topbar-collapse'}"><span class="am-sr-only">导航切换</span> <span
+                class="am-icon-bars"></span></button>
+        <div class="am-collapse am-topbar-collapse" id="doc-topbar-collapse">
+            <ul class="am-nav am-nav-pills am-topbar-nav">
+                <li class="am-active"><a href="#">首页</a></li>
+                <li><a href="#">项目</a></li>
+                <li class="am-dropdown" data-am-dropdown>
+                    <a class="am-dropdown-toggle" data-am-dropdown-toggle href="javascript:;">
+                        下拉 <span class="am-icon-caret-down"></span>
+                    </a>
+                    <ul class="am-dropdown-content">
+                        <li class="am-dropdown-header">标题</li>
+                        <li><a href="#">1. 去月球</a></li>
+                        <li class="am-active"><a href="#">2. 去火星</a></li>
+                        <li><a href="#">3. 还是回地球</a></li>
+                        <li class="am-disabled"><a href="#">4. 下地狱</a></li>
+                        <li class="am-divider"></li>
+                        <li><a href="#">5. 桥头一回首</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <form class="am-topbar-form am-topbar-left am-form-inline" role="search">
+                <div class="am-form-group">
+                    <input type="text" class="am-form-field am-input-sm" placeholder="搜索">
+                </div>
+            </form>
+
+            <div class="am-topbar-right">
+                <div class="am-dropdown" data-am-dropdown="{boundary: '.am-topbar'}">
+                    <button class="am-btn am-btn-secondary am-topbar-btn am-btn-sm am-dropdown-toggle"
+                            data-am-dropdown-toggle>其他 <span class="am-icon-caret-down"></span></button>
+                    <ul class="am-dropdown-content">
+                        <li><a href="#">注册</a></li>
+                        <li><a href="#">随便看看</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="am-topbar-right">
+                <button class="am-btn am-btn-primary am-topbar-btn am-btn-sm">登录</button>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <form class="am-form am-form-horizontal">
+        <div class="am-form-group">
+            <label for="doc-ipt-3" class="am-u-sm-2 am-form-label">账号</label>
+            <div class="am-u-sm-10">
+                <input type="email" id="doc-ipt-3" placeholder="账号">
+            </div>
+        </div>
+
+        <div class="am-form-group">
+            <label for="doc-ipt-pwd-2" class="am-u-sm-2 am-form-label">密码</label>
+            <div class="am-u-sm-10">
+                <input type="password" id="doc-ipt-pwd-2" placeholder="密码">
+            </div>
+        </div>
+
+        <div class="am-form-group">
+            <div class="am-u-sm-offset-2 am-u-sm-10">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox"> 记住十万年
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="am-form-group">
+            <div class="am-u-sm-10 am-u-sm-offset-2">
+                <button type="submit" class="am-btn am-btn-default">登入呗</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<footer data-am-widget="footer"
+        class="am-footer am-footer-default"
+        data-am-footer="{  }">
+    <div class="am-footer-switch">
+    <span class="am-footer-ysp" data-rel="mobile"
+          data-am-modal="{target: '#am-switch-mode'}">
+          手机版
+    </span>
+        <span class="am-footer-divider"> | </span>
+        <a id="godesktop" data-rel="desktop" class="am-footer-desktop" href="javascript:">
+            电脑版
+        </a>
+    </div>
+    <div class="am-footer-miscs ">
+
+        <p>由 <a href="http://beldon.me/" title="Beldon" target="_blank" class="">Beldon</a>提供技术支持</p>
+        <p>CopyRight©2017 Beldon Inc.</p>
+        <p>粤ICP备xxxx</p>
+    </div>
+</footer>
+
+<script src="http://libs.baidu.com/jquery/1.11.3/jquery.min.js"></script>
+<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
+<script src="../static/plugins/amazeui/js/amazeui.ie8polyfill.min.js"></script>
+<script src="../static/plugins/amazeui/js/amazeui.min.js"></script>
+</body>
+</html>
