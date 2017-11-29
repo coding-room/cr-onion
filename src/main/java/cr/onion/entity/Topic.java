@@ -33,7 +33,7 @@ public class Topic extends BaseEntity {
     /**
      * 帖子状态:0-草稿，1-已发布,-1回收站
      */
-    private int status;
+    private int status = 1;
 
     /**
      * 是否置顶，1-true，0-false

@@ -4,6 +4,7 @@ import cr.onion.domain.UserDomain;
 import cr.onion.entity.User;
 import cr.onion.repo.UserAutoRepo;
 import cr.onion.web.MockUtils;
+import cr.onion.web.controller.mo.LoginMO;
 import cr.onion.web.controller.mo.RegisterMO;
 import org.junit.Assert;
 import org.junit.Before;
@@ -38,7 +39,7 @@ public abstract class BaseControllerTest {
     protected String password = "111111";
 
     @Before
-    public void before() {
+    public void beforeInit() {
         userAutoRepo.deleteAll();
     }
 
@@ -60,5 +61,18 @@ public abstract class BaseControllerTest {
         UserDomain userDomain = new UserDomain(user);
         Assert.assertTrue(userDomain.checkPassword(password));
         return user.getId();
+    }
+
+    protected void userLogin() throws Exception {
+        userLogin(account, password);
+    }
+
+    protected void userLogin(String account, String password) throws Exception {
+        LoginMO loginMO = new LoginMO();
+        loginMO.setAccount(account);
+        loginMO.setPassword(password);
+        mockMvc.perform(MockUtils.populatePostBuilder("/user/login", loginMO))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.code").value("0"));
     }
 }
