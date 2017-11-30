@@ -82,7 +82,13 @@
             </div>
 
             <div class="am-topbar-right">
-                <button class="am-btn am-btn-primary am-topbar-btn am-btn-sm">登录</button>
+                <ul class="am-nav am-nav-pills am-topbar-nav">
+                    <#if !sec.authenticated>
+                        <li><a href="/user/login">登录</a></li>
+                    <#else >
+                        <li><a href="#">您好，XXX</a></li>
+                    </#if>
+                </ul>
             </div>
         </div>
     </div>

@@ -1,6 +1,7 @@
 package cr.onion.common;
 
 import cr.onion.common.util.SSUtil;
+import cr.onion.entity.User;
 import freemarker.ext.beans.BeansWrapper;
 import freemarker.ext.beans.BeansWrapperBuilder;
 import freemarker.template.Configuration;
@@ -9,10 +10,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ApplicationObjectSupport;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Beldon.
@@ -67,4 +71,11 @@ public class BaseVariable extends ApplicationObjectSupport {
     }
 
 
+    protected HttpServletRequest currentRequest() {
+        return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+    }
+
+    protected String currentUserId() {
+        return (String) currentRequest().getSession().getAttribute(CommonConstant.Session.USER_ID);
+    }
 }

@@ -20,14 +20,14 @@ public abstract class BaseController {
     protected UserAutoRepo userAutoRepo;
 
     protected String currentUserId() {
-        return (String) getCurrentRequest().getSession().getAttribute(CommonConstant.Session.USER_ID);
+        return (String) currentRequest().getSession().getAttribute(CommonConstant.Session.USER_ID);
     }
 
     protected User currentUser() {
         return userAutoRepo.findOne(currentUserId());
     }
 
-    protected HttpServletRequest getCurrentRequest() {
+    protected HttpServletRequest currentRequest() {
         return ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
     }
 }
