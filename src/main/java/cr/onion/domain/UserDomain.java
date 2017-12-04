@@ -33,6 +33,7 @@ public class UserDomain {
      */
     public void register() {
         entity.setPassword(passwordService.encode(entity.getPassword()));
+        entity.setNickname(entity.getAccount());
         userAutoRepo.save(entity);
     }
 

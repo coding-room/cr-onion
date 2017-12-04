@@ -6,13 +6,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 /**
- * Created by Beldon.
- * Copyright (c)  2017/6/14, All Rights Reserved.
- * http://beldon.me
+ * @author Beldon.
  */
 
 @Component
-public class SecurityTag extends BaseVariable {
+public class SecurityVariable extends BaseVariable {
 
     @Override
     protected String getName() {

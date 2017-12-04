@@ -86,7 +86,7 @@
                     <#if !sec.authenticated>
                         <li><a href="/user/login">登录</a></li>
                     <#else >
-                        <li><a href="#">您好，XXX</a></li>
+                        <li><a href="#">您好，${user.nickname!}</a></li>
                     </#if>
                 </ul>
             </div>
