@@ -1,5 +1,6 @@
 package cr.onion.web.security.remember;
 
+import cr.onion.common.CommonConstant;
 import cr.onion.web.security.Authentication;
 import cr.onion.web.security.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -27,9 +28,10 @@ public class RememberMeAuthenticationFilter extends OncePerRequestFilter {
                                     FilterChain chain) throws ServletException, IOException {
         Authentication authentication = SecurityContextHolder.getAuthentication();
         if (authentication == null) {
-            Authentication rememberMeAuth = rememberMeServices.autoLogin(request,response);
+            Authentication rememberMeAuth = rememberMeServices.autoLogin(request, response);
             if (rememberMeAuth != null) {
                 SecurityContextHolder.setAuthentication(rememberMeAuth);
+                request.getSession().setAttribute(CommonConstant.Session.AUTHENTICATION, rememberMeAuth);
             }
         }
 

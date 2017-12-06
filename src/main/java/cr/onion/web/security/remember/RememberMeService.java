@@ -22,10 +22,10 @@ public interface RememberMeService {
     Authentication autoLogin(HttpServletRequest request, HttpServletResponse response);
 
     /**
-     * 设置cookie
+     * 密码登录设置cookie
      *
      * @param request
      * @param user
      */
-    void setCookie(HttpServletRequest request, User user);
+    void authenticated(HttpServletRequest request, HttpServletResponse response, User user);
 }

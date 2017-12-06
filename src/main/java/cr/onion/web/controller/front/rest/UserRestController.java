@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
 /**
@@ -45,7 +46,8 @@ public class UserRestController {
     }
 
     @PostMapping("/login")
-    public ResponseMO login(@RequestBody @Valid LoginMO loginMO, HttpServletRequest request) {
+    public ResponseMO login(@RequestBody @Valid LoginMO loginMO, HttpServletRequest request
+            , HttpServletResponse response) {
         User user = userAutoRepo.findByAccount(loginMO.getAccount());
         if (user == null) {
             return ResponseUtils.error("用户不存在");
@@ -55,7 +57,7 @@ public class UserRestController {
             return ResponseUtils.error("密码错误");
         }
         request.getSession().setAttribute(CommonConstant.Session.USER_ID, user.getId());
-        rememberMeService.setCookie(request, user);
+        rememberMeService.authenticated(request, response, user);
         return ResponseUtils.success();
     }
 }
