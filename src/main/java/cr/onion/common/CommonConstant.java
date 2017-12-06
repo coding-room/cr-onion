@@ -6,5 +6,6 @@ package cr.onion.common;
 public interface CommonConstant {
     interface Session {
         String USER_ID = "userId";
+        String AUTHENTICATION = "Authentication";
     }
 }

@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class UserController extends BaseFrontController {
 
 
-    @GetMapping("login")
+    @GetMapping("/login")
     public String login() {
-        return getTemplate("login");
+        return getTemplate("user/login");
     }
 
     @GetMapping("/reg")
     public String reg() {
-        return getTemplate("reg");
+        return getTemplate("user/reg");
     }
 
 }

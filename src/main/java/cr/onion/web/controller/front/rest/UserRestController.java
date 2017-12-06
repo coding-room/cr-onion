@@ -8,6 +8,7 @@ import cr.onion.entity.User;
 import cr.onion.repo.UserAutoRepo;
 import cr.onion.web.controller.mo.LoginMO;
 import cr.onion.web.controller.mo.RegisterMO;
+import cr.onion.web.security.remember.RememberMeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,6 +27,9 @@ public class UserRestController {
 
     @Autowired
     private UserAutoRepo userAutoRepo;
+
+    @Autowired
+    private RememberMeService rememberMeService;
 
     @PostMapping("/register")
     public ResponseMO register(@RequestBody @Valid RegisterMO registerMO) {
@@ -51,6 +55,7 @@ public class UserRestController {
             return ResponseUtils.error("密码错误");
         }
         request.getSession().setAttribute(CommonConstant.Session.USER_ID, user.getId());
+        rememberMeService.setCookie(request, user);
         return ResponseUtils.success();
     }
 }
