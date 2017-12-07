@@ -35,8 +35,7 @@ public class PersistentTokenRememberMeService extends BaseRememberMeService {
         if (cookies != null) {
             for (Cookie cookie : cookies) {
                 if (getRememberKey().equals(cookie.getName())) {
-                    String rememberCookie = cookie.getValue();
-                    CookieTokens cookieTokens = decodeCookie(rememberCookie);
+                    CookieTokens cookieTokens = decodeCookie(cookie.getValue());
                     if (cookieTokens != null && !isTokenExpired(cookieTokens.getTokenExpiryTime())) {
                         String account = cookieTokens.getAccount();
                         RememberMeToken rememberMeToken = rememberMeTokenRepo.findByAccountAndTokenValue(account, cookieTokens.getSignature());
@@ -67,6 +66,20 @@ public class PersistentTokenRememberMeService extends BaseRememberMeService {
 
     @Override
     public void logout(HttpServletRequest request, HttpServletResponse response) {
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (getRememberKey().equals(cookie.getName())) {
+                    CookieTokens cookieTokens = decodeCookie(cookie.getValue());
+                    if (cookieTokens != null && !isTokenExpired(cookieTokens.getTokenExpiryTime())) {
+                        RememberMeToken rememberMeToken = rememberMeTokenRepo.findByAccountAndTokenValue(cookieTokens.getAccount(), cookieTokens.getSignature());
+                        if (rememberMeToken != null) {
+                            rememberMeTokenRepo.delete(rememberMeToken);
+                        }
+                    }
+                }
+            }
+        }
         clearCookie(request, response);
     }
 

@@ -75,7 +75,9 @@
                     <button class="am-btn am-btn-secondary am-topbar-btn am-btn-sm am-dropdown-toggle"
                             data-am-dropdown-toggle>其他 <span class="am-icon-caret-down"></span></button>
                     <ul class="am-dropdown-content">
-                        <li><a href="/user/reg">注册</a></li>
+                        <#if sec.isLogin()>
+                            <li><a href="/user/logout">退出</a></li>
+                        </#if>
                         <li><a href="#">随便看看</a></li>
                     </ul>
                 </div>
@@ -83,8 +85,9 @@
 
             <div class="am-topbar-right">
                 <ul class="am-nav am-nav-pills am-topbar-nav">
-                    <#if !sec.authenticated>
+                    <#if !sec.isLogin()>
                         <li><a href="/user/login">登录</a></li>
+                        <li><a href="/user/reg">注册</a></li>
                     <#else >
                         <li><a href="#">您好，${user.nickname!}</a></li>
                     </#if>

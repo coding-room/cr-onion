@@ -30,7 +30,7 @@ public class AuthorizationAdvice implements MethodInterceptor {
             if (returnType.isAssignableFrom(ResponseMO.class)) {
                 return ResponseUtils.error("no login!");
             }else{
-                return "redirect:/user/login ";
+                return "redirect:/user/login";
             }
         }
         return invocation.proceed();

@@ -2,8 +2,9 @@ package cr.onion.web.variable;
 
 
 import cr.onion.common.BaseVariable;
+import cr.onion.web.security.Authentication;
+import cr.onion.web.security.SecurityContextHolder;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 
 /**
  * @author Beldon.
@@ -24,7 +25,17 @@ public class SecurityVariable extends BaseVariable {
      * @return
      */
     public boolean isAuthenticated() {
-        return StringUtils.hasText(currentUserId());
+        Authentication authentication = SecurityContextHolder.getAuthentication();
+        return authentication != null && authentication.isAuthenticated();
+    }
+
+    /**
+     * 判断用户是否登录
+     *
+     * @return
+     */
+    public boolean isLogin() {
+        return SecurityContextHolder.getAuthentication() != null;
     }
 
 }

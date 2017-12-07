@@ -8,12 +8,10 @@ import cr.onion.entity.User;
 import cr.onion.repo.UserAutoRepo;
 import cr.onion.web.controller.mo.LoginMO;
 import cr.onion.web.controller.mo.RegisterMO;
+import cr.onion.web.security.SecurityContextHolder;
 import cr.onion.web.security.remember.RememberMeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -58,6 +56,14 @@ public class UserRestController {
         }
         request.getSession().setAttribute(CommonConstant.Session.USER_ID, user.getId());
         rememberMeService.loginSuccess(request, response, user);
+        return ResponseUtils.success();
+    }
+
+    @PostMapping("/logout")
+    public ResponseMO logout(HttpServletRequest request, HttpServletResponse response) {
+        rememberMeService.logout(request, response);
+        SecurityContextHolder.removeAuthentication();
+        request.getSession().removeAttribute(CommonConstant.Session.AUTHENTICATION);
         return ResponseUtils.success();
     }
 }
