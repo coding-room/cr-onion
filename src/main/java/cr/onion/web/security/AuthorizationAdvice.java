@@ -1,6 +1,7 @@
 package cr.onion.web.security;
 
-import cr.onion.common.CommonConstant;
+import cr.onion.common.ResponseMO;
+import cr.onion.common.util.ResponseUtils;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.slf4j.Logger;
@@ -17,17 +18,22 @@ import javax.servlet.http.HttpServletRequest;
  * @create 2017-12-06 下午3:05
  */
 @Service
-public class AuthorizationAdvisor implements MethodInterceptor {
-    private Logger log = LoggerFactory.getLogger(AuthorizationAdvisor.class);
+public class AuthorizationAdvice implements MethodInterceptor {
+    private Logger log = LoggerFactory.getLogger(AuthorizationAdvice.class);
+
     @Override
     public Object invoke(MethodInvocation invocation) throws Throwable {
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
-        String userId = (String) request.getSession().getAttribute(CommonConstant.Session.USER_ID);
-        if (StringUtils.isEmpty(userId)) {
-            // TODO 处理未登录逻辑
+        Authentication authentication = SecurityContextHolder.getAuthentication();
+        if (authentication == null) {
             log.info("no login!");
-
+            Class returnType = invocation.getMethod().getReturnType();
+            if (returnType.isAssignableFrom(ResponseMO.class)) {
+                return ResponseUtils.error("no login!");
+            }else{
+                return "redirect:/user/login ";
+            }
         }
         return invocation.proceed();
     }
+
 }

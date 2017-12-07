@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
  * 在需要授权的Controller 方法上加改注解
  * 具体实现看一下两个类
  * {@link cr.onion.web.security.AuthorizationPointCutAdvisor}
- * {@link cr.onion.web.security.AuthorizationAdvisor}
+ * {@link cr.onion.web.security.AuthorizationAdvice}
  * @author Beldon
  */
 @Target(ElementType.METHOD)
