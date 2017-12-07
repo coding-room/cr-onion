@@ -34,7 +34,7 @@ public class DefaultRememberMeService extends BaseRememberMeService {
                 if (getRememberKey().equals(cookie.getName())) {
                     String rememberCookie = cookie.getValue();
                     CookieTokens cookieTokens = decodeCookie(rememberCookie);
-                    if (cookieTokens != null && isTokenExpired(cookieTokens.getTokenExpiryTime())) {
+                    if (cookieTokens != null && !isTokenExpired(cookieTokens.getTokenExpiryTime())) {
                         String account = cookieTokens.getAccount();
                         User user = userAutoRepo.findByAccount(account);
                         if (user != null) {

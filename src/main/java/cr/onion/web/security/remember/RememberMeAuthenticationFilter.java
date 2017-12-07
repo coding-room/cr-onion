@@ -32,6 +32,7 @@ public class RememberMeAuthenticationFilter extends OncePerRequestFilter {
             if (rememberMeAuth != null) {
                 SecurityContextHolder.setAuthentication(rememberMeAuth);
                 request.getSession().setAttribute(CommonConstant.Session.AUTHENTICATION, rememberMeAuth);
+                request.getSession().setAttribute(CommonConstant.Session.USER_ID, rememberMeAuth.user().getId());
             }
         }
 

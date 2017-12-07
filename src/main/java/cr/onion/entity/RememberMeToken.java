@@ -1,10 +1,13 @@
 package cr.onion.entity;
 
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.util.Date;
 
 /**
  * @author Beldon
  */
+@Document(collection = "remember_me_token")
 public class RememberMeToken extends BaseEntity{
     private String account;
     private String tokenValue;

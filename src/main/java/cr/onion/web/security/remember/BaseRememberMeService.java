@@ -11,7 +11,7 @@ import java.util.Base64;
 /**
  * @author Beldon
  */
-public abstract class BaseRememberMeService implements RememberMeService{
+public abstract class BaseRememberMeService implements RememberMeService {
     private static final String DELIMITER = ":";
 
     private String rememberKey = DEFAULT_REMEMBER_KEY;
@@ -21,11 +21,10 @@ public abstract class BaseRememberMeService implements RememberMeService{
 
     }
 
-    public BaseRememberMeService(String rememberKey,int expiry) {
+    public BaseRememberMeService(String rememberKey, int expiry) {
         this.rememberKey = rememberKey;
         this.expiry = expiry;
     }
-
 
 
     protected boolean isTokenExpired(long tokenExpiryTime) {
@@ -36,7 +35,7 @@ public abstract class BaseRememberMeService implements RememberMeService{
         String cookies = new String(Base64.getDecoder().decode(cookieValue));
         String[] cookiesArr = cookies.split(DELIMITER);
         String[] tokens = StringUtils.delimitedListToStringArray(cookies, DELIMITER);
-        if (cookiesArr.length >= 4) {
+        if (cookiesArr.length >= 3) {
             return new CookieTokens(Long.valueOf(tokens[0]), tokens[1], tokens[2]);
         }
         return null;
@@ -60,6 +59,7 @@ public abstract class BaseRememberMeService implements RememberMeService{
 
         Cookie cookie = new Cookie(rememberKey, encodeCookie);
         cookie.setMaxAge(getExpiry());
+        cookie.setPath("/");
         response.addCookie(cookie);
     }
 
@@ -69,16 +69,17 @@ public abstract class BaseRememberMeService implements RememberMeService{
             if (rememberKey.equals(cookie.getName())) {
                 cookie.setMaxAge(0);
                 cookie.setValue("");
+                cookie.setPath("/");
                 response.addCookie(cookie);
             }
         }
     }
 
     protected long calculateLoginLifetime() {
-        return System.currentTimeMillis() + expiry;
+        return System.currentTimeMillis() + expiry * 1000;
     }
 
-    protected abstract String makeTokenSignature(long expiryTime,User user);
+    protected abstract String makeTokenSignature(long expiryTime, User user);
 
     public int getExpiry() {
         return expiry;

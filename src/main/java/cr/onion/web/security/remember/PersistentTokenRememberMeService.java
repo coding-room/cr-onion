@@ -37,10 +37,10 @@ public class PersistentTokenRememberMeService extends BaseRememberMeService {
                 if (getRememberKey().equals(cookie.getName())) {
                     String rememberCookie = cookie.getValue();
                     CookieTokens cookieTokens = decodeCookie(rememberCookie);
-                    if (cookieTokens != null && isTokenExpired(cookieTokens.getTokenExpiryTime())) {
+                    if (cookieTokens != null && !isTokenExpired(cookieTokens.getTokenExpiryTime())) {
                         String account = cookieTokens.getAccount();
                         RememberMeToken rememberMeToken = rememberMeTokenRepo.findByAccountAndTokenValue(account, cookieTokens.getSignature());
-                        if (rememberCookie != null) {
+                        if (rememberMeToken != null) {
                             User user = userAutoRepo.findByAccount(account);
                             if (user != null) {
                                 rememberMeToken.setTokenValue(makeTokenSignature(calculateLoginLifetime(), user));
@@ -72,7 +72,7 @@ public class PersistentTokenRememberMeService extends BaseRememberMeService {
 
     @Override
     protected String makeTokenSignature(long expiryTime, User user) {
-        List<RememberMeToken> rememberMeTokens = rememberMeTokenRepo.findAllByAccountOrderByCreatedDesc(user.getAccount());
+        List<RememberMeToken> rememberMeTokens = rememberMeTokenRepo.findAllByAccountOrderByCreated(user.getAccount());
         if (rememberMeTokens.size() >= size) {
             int end = rememberMeTokens.size() - size + 1;
             for (int i = 0; i < end; i++) {
@@ -85,6 +85,6 @@ public class PersistentTokenRememberMeService extends BaseRememberMeService {
         rememberMeToken.setAccount(user.getAccount());
         rememberMeToken.setTokenValue(uuid);
         rememberMeTokenRepo.save(rememberMeToken);
-        return UUID.randomUUID().toString();
+        return uuid;
     }
 }
