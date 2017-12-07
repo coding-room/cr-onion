@@ -13,6 +13,16 @@ import javax.servlet.http.HttpServletResponse;
 public interface RememberMeService {
 
     /**
+     * 记住登录默认cookie名称
+     */
+    String DEFAULT_REMEMBER_KEY = "remember-me";
+
+    /**
+     * 默认过期时间，两个星期
+     */
+    int DEFAULT_EXPIRY = 60 * 60 * 24 * 14;
+
+    /**
      * 自动登录
      *
      * @param request
@@ -27,5 +37,14 @@ public interface RememberMeService {
      * @param request
      * @param user
      */
-    void authenticated(HttpServletRequest request, HttpServletResponse response, User user);
+    void loginSuccess(HttpServletRequest request, HttpServletResponse response, User user);
+
+
+    /**
+     * 退出登录
+     *
+     * @param request
+     * @param response
+     */
+    void logout(HttpServletRequest request, HttpServletResponse response);
 }

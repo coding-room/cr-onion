@@ -57,7 +57,7 @@ public class UserRestController {
             return ResponseUtils.error("密码错误");
         }
         request.getSession().setAttribute(CommonConstant.Session.USER_ID, user.getId());
-        rememberMeService.authenticated(request, response, user);
+        rememberMeService.loginSuccess(request, response, user);
         return ResponseUtils.success();
     }
 }

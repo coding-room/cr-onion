@@ -12,23 +12,17 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 
 /**
- * Created by Beldon.
- * Copyright (c)  2017-03-19, All Rights Reserved.
- * http://beldon.me
+ * @author Beldon.
  */
 @Configuration
 @EnableWebMvc
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
-
-    @Autowired
-    private SiteConfig siteConfig;
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         super.addResourceHandlers(registry);
         registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
         registry.addResourceHandler("/templates/**").addResourceLocations("classpath:/templates/");
-        registry.addResourceHandler(siteConfig.getUploadFileUrlPath() + "/**").addResourceLocations("file:" + siteConfig.getUploadPath());
     }
 
     @Override
