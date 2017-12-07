@@ -1,4 +1,4 @@
-<#include "common/_layout.ftl"/>
+<#include "../common/_layout.ftl"/>
 <#assign javascript>
 <script type="text/javascript">
     $(function () {
