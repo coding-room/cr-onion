@@ -32,7 +32,7 @@
     <meta name="msapplication-TileColor" content="#0e90d2">
 
     <link rel="stylesheet" href="/static/plugins/amazeui/css/amazeui.min.css">
-    <link rel="stylesheet" href="/static/plugins/amazeui/css/app.css">
+    <link rel="stylesheet" href="/templates/theme/default/common/css/app.css">
 </head>
 <body>
 <header class="am-topbar am-topbar-inverse">

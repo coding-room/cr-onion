@@ -1,4 +1,5 @@
 <#macro paginate currentPage totalPage actionUrl>
+<#local currentPage = currentPage + 1>
 <#if (totalPage>1)>
 	<#if (totalPage <= 0) || (currentPage > totalPage)><#return></#if>
 	<#local startPage = currentPage - 2>
@@ -7,37 +8,34 @@
 	<#local endPage = currentPage + 2>
 	<#if (endPage > totalPage)><#local endPage = totalPage></#if>
 
-<div style="text-align: center">
-    <div class="laypage-main">
+    <ul class="am-pagination am-pagination-centered">
 		<#if (currentPage <= 3)>
 			<#local startPage = 1>
 		</#if>
 		<#if ((totalPage - currentPage) < 2)>
 			<#local endPage = totalPage>
 		</#if>
-
 		<#if (currentPage == 1)>
-			<!--<li>上页</li>-->
+		   	<li class="am-disabled"><a href="#">首页</a></li>
+        	<li class="am-disabled"><a href="#">上一页</a></li>
 		<#else>
-            <a href="${actionUrl?replace('\{page}','1')}" class="" title="首页">首页</a>
-            <a href="${actionUrl?replace('\{page}','1')}" class="laypage-prev">上一页</a>
+            <li><a href="${actionUrl?replace('\{page}','1')}">首页</a></li>
+        	<li><a href="${actionUrl?replace('\{page}','#{currentPage-1}')}">上一页</a></li>
 		</#if>
-
 		<#list startPage..endPage as i>
 			<#if currentPage == i>
-                <span class="laypage-curr">#{i}</span>
+			 	<li class="am-active"><a href="#">#{i}</a></li>
 			<#else>
-                <a href="${actionUrl?replace('\{page}','#{i}')}">#{i}</a>
+                <li><a href="${actionUrl?replace('\{page}','#{i}')}">#{i}</a></li>
 			</#if>
 		</#list>
-
 		<#if (currentPage == totalPage)>
-			<!--<li>下页</li>-->
+			<li class="am-disabled"><a href="#">尾页</a></li>
+        	<li class="am-disabled"><a href="#">下一页</a></li>
 		<#else>
-            <a href="${actionUrl?replace('\{page}','#{currentPage + 1}')}" class="laypage-next">下一页</a>
-            <a href="${actionUrl?replace('\{page}','#{totalPage}')}" class="laypage-last" title="尾页">尾页</a>
+			<li><a href="${actionUrl?replace('\{page}','#{currentPage + 1}')}" class="laypage-next">下一页</a></li>
+			<li><a href="${actionUrl?replace('\{page}','#{totalPage}')}" class="laypage-last" title="尾页">尾页</a></li>
 		</#if>
-    </div>
-</div>
+    </ul>
 </#if>
 </#macro>

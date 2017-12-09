@@ -14,8 +14,8 @@
     </div>
     <div class="am-footer-miscs ">
 
-        <p>由 <a href="http://beldon.me/" title="Beldon" target="_blank" class="">Beldon</a>提供技术支持</p>
-        <p>CopyRight©2017 Beldon Inc.</p>
+        <p>由 <a href="https://github.com/coding-room" title="Beldon" target="_blank" class="">Coding-Room</a>提供技术支持</p>
+        <p>CopyRight©2017 Coding-Room Inc.</p>
         <p>粤ICP备xxxx</p>
     </div>
 </footer>

@@ -12,3 +12,23 @@
     padding-left: 1rem;
     padding-right: 1rem;
 }
+
+@media screen and (min-width: 641px) {
+    .topic-list>li{
+        padding: 5px 0 !important;
+    }
+    .topic-list .am-list-item-hd{
+        margin-top: 5px;
+    }
+}
+
+@media only screen and (max-width: 640px){
+    .topic-list>li{
+        padding: 5px 0 !important;
+    }
+    .topic-list .am-list-item-hd{
+        margin-top: 5px;
+    }
+}
+
+

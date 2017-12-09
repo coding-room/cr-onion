@@ -1,9 +1,9 @@
-<#include "common/_layout.ftl"/>
-<#include "common/_paginate.ftl"/>
+<#include "../common/_layout.ftl"/>
+<#include "../common/_paginate.ftl"/>
 <@html title=''>
 
 <div data-am-widget="list_news" class="am-list-news am-list-news-default">
-    <@topic_tag >
+    <@topic_tag page="${page!}">
     <div class="am-list-news-bd">
         <ul class="am-list topic-list">
             <#list page.content as topic>

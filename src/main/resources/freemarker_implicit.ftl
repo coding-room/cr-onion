@@ -3,4 +3,7 @@
 [#-- @ftlvariable name="sec" type="cr.onion.web.variable.SecurityVariable" --]
 [#-- @ftlvariable name="onion" type="cr.onion.web.variable.OnionVariable" --]
 [#-- @ftlvariable name="topicCategory" type="cr.onion.entity.TopicCategory" --]
+[#-- @ftlvariable name="topic" type="cr.onion.entity.Topic" --]
+[#-- @ftlvariable name="page" type="org.springframework.data.domain.Page" --]
 [#macro topic_category id=""][/#macro]
+[#macro topic_tag categoryId='' page='1' pageSize='10'][/#macro]

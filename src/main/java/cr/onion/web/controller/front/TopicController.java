@@ -21,6 +21,12 @@ public class TopicController extends BaseFrontController {
         return getTemplate("topic/topic");
     }
 
+    @GetMapping("/p/{page}")
+    public String page(@PathVariable("page") Integer page, Model model) {
+        model.addAttribute("page", page);
+        return getTemplate("topic/page");
+    }
+
     @Authorization
     @GetMapping("/add")
     public String add() {
