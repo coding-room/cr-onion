@@ -16,11 +16,10 @@
     <!-- No Baidu Siteapp-->
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
 
-    <link rel="icon" type="image/png" href="/static/plugins/amazeui/i/favicon.png">
-
+    <link rel="icon" type="image/png" href="/static/img/favicon.png">
     <!-- Add to homescreen for Chrome on Android -->
     <meta name="mobile-web-app-capable" content="yes">
-    <link rel="icon" sizes="192x192" href="/static/plugins/amazeui/i/app-icon72x72@2x.png">
+    <link rel="apple-touch-icon-precomposed" href="/static/img/app-icon.png">
 
     <!-- Add to homescreen for Safari on iOS -->
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -62,6 +61,9 @@
                         <li><a href="#">5. 桥头一回首</a></li>
                     </ul>
                 </li>
+                <#if sec.isLogin()>
+                    <li><a href="/topic/add">发布话题</a></li>
+                </#if>
             </ul>
 
             <form class="am-topbar-form am-topbar-left am-form-inline" role="search">
