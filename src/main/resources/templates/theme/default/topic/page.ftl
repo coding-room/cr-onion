@@ -19,9 +19,7 @@
                            <div class="am-list-item-text">
                                <a href="#">${topic.category.name}</a>•
                                <a href="/u/${topic.user.account}">${topic.user.nickname}</a>•
-                               <a href="#">0个回复</a>•
-                               <a href="#">28次浏览</a>•
-                               <a href="#">${(onion.formatData(topic.created))!}</a>
+                               <a href="#">0个回复</a>•28次浏览•${(onion.formatData(topic.created))!}<a href="#"></a>
                            </div>
                        </div>
                    </li>
