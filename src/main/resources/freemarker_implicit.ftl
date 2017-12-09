@@ -1,6 +1,6 @@
 [#ftl]
 [#-- @implicitly included --]
 [#-- @ftlvariable name="sec" type="cr.onion.web.variable.SecurityVariable" --]
-[#-- @ftlvariable name="user" type="cr.onion.web.variable.UserVariable" --]
+[#-- @ftlvariable name="onion" type="cr.onion.web.variable.OnionVariable" --]
 [#-- @ftlvariable name="topicCategory" type="cr.onion.entity.TopicCategory" --]
-[#macro topic_category id][/#macro]
+[#macro topic_category id=""][/#macro]

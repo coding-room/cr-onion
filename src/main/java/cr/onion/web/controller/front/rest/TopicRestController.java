@@ -42,7 +42,7 @@ public class TopicRestController extends BaseController {
         topic.setCreated(new Date());
         topic.setUser(currentUser());
         topicAutoRepo.save(topic);
-        return ResponseUtils.success();
+        return ResponseUtils.success("", topic.getId());
     }
 
     @PutMapping("/{id}")

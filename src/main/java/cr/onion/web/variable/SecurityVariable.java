@@ -38,4 +38,14 @@ public class SecurityVariable extends BaseVariable {
         return SecurityContextHolder.getAuthentication() != null;
     }
 
+    /**
+     * 判断是不是owner
+     *
+     * @param uid
+     * @return
+     */
+    public boolean isOwner(String uid) {
+        Authentication authentication = SecurityContextHolder.getAuthentication();
+        return authentication != null && uid.equals(authentication.user().getId());
+    }
 }

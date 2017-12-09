@@ -22,6 +22,7 @@
 
 <script src="/static/plugins/jquery/jquery-1.9.1.min.js"></script>
 <script src="/static/plugins/modernizr.js"></script>
+<script src="/static/plugins/layer/layer.js"></script>
 <script src="/static/plugins/amazeui/js/amazeui.ie8polyfill.min.js"></script>
 <script src="/static/plugins/amazeui/js/amazeui.min.js"></script>
     ${javascript!}

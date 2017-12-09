@@ -91,7 +91,7 @@
                         <li><a href="/user/login">登录</a></li>
                         <li><a href="/user/reg">注册</a></li>
                     <#else >
-                        <li><a href="#">您好，${user.nickname!}</a></li>
+                        <li><a href="#">您好，${onion.currentUser().nickname!}</a></li>
                     </#if>
                 </ul>
             </div>

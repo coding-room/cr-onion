@@ -1,26 +1,19 @@
-<#include "common/_layout.ftl"/>
+<#include "../common/_layout.ftl"/>
 <@html title=''>
+    <#assign topic=onion.topic("${id!}")/>
   <article class="am-article">
       <div class="am-article-hd">
-          <h1 class="am-article-title">Onion到底是什么？</h1>
-          <p class="am-article-meta">Beldon（广东） 2017-12-12</p>
+          <h1 class="am-article-title">${(topic.title)!}</h1>
+          <p class="am-article-meta">
+              ${(topic.user.nickname)!}（广东） ${(onion.formatData(topic.created))!}
+              <#if sec.isOwner("${topic.user.id}")>
+                <a class="am-btn am-btn-default am-btn-xs" href="/topic/edit/${topic.id}">编辑</a>
+              </#if>
+          </p>
       </div>
 
       <div class="am-article-bd">
-          <p class="am-article-lead">
-              Onion到底是什么
-              Onion到底是什么
-              Onion到底是什么
-          </p>
-          Onion到底是什么 <br>
-          Onion到底是什么 <br>
-          Onion到底是什么 <br>
-          Onion到底是什么 <br>
-          Onion到底是什么 <br>
-          Onion到底是什么 <br>
-          Onion到底是什么 <br>
-          Onion到底是什么 <br>
-          Onion到底是什么 <br>
+          ${(topic.content)!}
       </div>
   </article>
 <hr/>
