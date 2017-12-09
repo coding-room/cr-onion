@@ -1,5 +1,6 @@
 package cr.onion.common;
 
+import cr.onion.common.annotation.Tag;
 import cr.onion.common.util.SSUtil;
 import freemarker.core.Environment;
 import freemarker.template.SimpleScalar;
@@ -17,6 +18,10 @@ import java.util.Map;
 public abstract class BaseTag extends BaseVariable implements TemplateDirectiveModel {
     @Override
     protected String getName() {
+        Tag tag = this.getClass().getAnnotation(Tag.class);
+        if (tag != null) {
+            return tag.name();
+        }
         return SSUtil.humpToLine(this.getClass().getSimpleName()).substring(1);
     }
 

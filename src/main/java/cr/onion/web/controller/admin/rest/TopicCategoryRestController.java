@@ -10,6 +10,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * @author Beldon.
@@ -19,6 +20,12 @@ import javax.validation.Valid;
 public class TopicCategoryRestController {
     @Autowired
     private TopicCategoryAutoRepo topicCategoryAutoRepo;
+
+    @GetMapping
+    public ResponseMO list() {
+        List<TopicCategory> categories = topicCategoryAutoRepo.findAll();
+        return ResponseUtils.success("", categories);
+    }
 
     @PostMapping
     public ResponseMO add(@RequestBody @Valid TopicCategoryMO categoryMO) {

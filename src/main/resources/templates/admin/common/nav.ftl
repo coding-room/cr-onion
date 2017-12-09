@@ -5,12 +5,12 @@
         <ul class="sidebar-nav">
             <li class="sidebar-nav-heading">管理后台 <span class="sidebar-nav-heading-info"> onion管理后台</span></li>
             <li class="sidebar-nav-link">
-                <a href="index.html" class="active">
+                <a href="/admin/index" class="active">
                     <i class="am-icon-home sidebar-nav-link-logo"></i> 首页
                 </a>
             </li>
             <li class="sidebar-nav-link">
-                <a href="tables.html">
+                <a href="/admin/topicCategory/list">
                     <i class="am-icon-table sidebar-nav-link-logo"></i> 帖子分类
                 </a>
             </li>
