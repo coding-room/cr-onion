@@ -9,7 +9,7 @@
             <#list page.content as topic>
                    <li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-left">
                        <div class="am-u-sm-2 am-u-md-1 am-list-thumb">
-                           <a href="#" class="">
+                           <a href="/u/${topic.user.account}" class="">
                                <img class="am-img-thumbnail am-circle" src="/templates/theme/default/common/images/avatar.png"/>
                            </a>
                        </div>
