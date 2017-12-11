@@ -1,14 +1,14 @@
-package cr.onion.web.controller.mo;
+package cr.onion.web.controller.vo;
 
-import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Length;
 
 /**
  * @author Beldon.
  */
-public class LoginMO {
-    @NotEmpty(message = "账号不能为空")
+public class RegisterVO {
+    @Length(min = 5, message = "账号必须大于五位")
     private String account;
-    @NotEmpty(message = "密码不能为空")
+    @Length(min = 6, max = 16, message = "密码长度6~16之间")
     private String password;
 
     public String getAccount() {

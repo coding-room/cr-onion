@@ -1,6 +1,6 @@
 package cr.onion.web;
 
-import cr.onion.common.ResponseMO;
+import cr.onion.common.ResponseVO;
 import cr.onion.common.exception.OnionException;
 import cr.onion.common.util.ResponseUtils;
 import org.slf4j.Logger;
@@ -32,7 +32,7 @@ public class GlobalExceptionHandler {
      * @return
      */
     @ExceptionHandler(value = {Exception.class, RuntimeException.class})
-    public ResponseMO defaultErrorHandler(Exception e) {
+    public ResponseVO defaultErrorHandler(Exception e) {
         logger.error(e.getMessage(), e);
 
         return ResponseUtils.error("系统繁忙，请稍后再试");
@@ -46,7 +46,7 @@ public class GlobalExceptionHandler {
      * @return
      */
     @ExceptionHandler({MethodArgumentNotValidException.class, BindException.class, MissingServletRequestParameterException.class})
-    public ResponseMO methodArgumentNotValidException(Exception e) {
+    public ResponseVO methodArgumentNotValidException(Exception e) {
         if (logger.isDebugEnabled()) {
             logger.info(e.getMessage(), e);
         }
@@ -79,7 +79,7 @@ public class GlobalExceptionHandler {
      * @return
      */
     @ExceptionHandler(HttpRequestMethodNotSupportedException.class)
-    public ResponseMO methodNotSupported(HttpRequestMethodNotSupportedException e) {
+    public ResponseVO methodNotSupported(HttpRequestMethodNotSupportedException e) {
         if (logger.isDebugEnabled()) {
             logger.debug(e.getMessage(), e);
         }
@@ -94,7 +94,7 @@ public class GlobalExceptionHandler {
      * @return
      */
     @ExceptionHandler(HttpMediaTypeNotSupportedException.class)
-    public ResponseMO httpMediaTypeNotSupportedException(HttpMediaTypeNotSupportedException e) {
+    public ResponseVO httpMediaTypeNotSupportedException(HttpMediaTypeNotSupportedException e) {
         if (logger.isDebugEnabled()) {
             logger.debug(e.getMessage(), e);
         }
@@ -110,7 +110,7 @@ public class GlobalExceptionHandler {
      * @return
      */
     @ExceptionHandler(OnionException.class)
-    public ResponseMO onionException(OnionException exception) {
+    public ResponseVO onionException(OnionException exception) {
         return ResponseUtils.error(exception.getMessage());
     }
 }

@@ -1,10 +1,10 @@
 package cr.onion.web.controller.admin.rest;
 
-import cr.onion.common.ResponseMO;
+import cr.onion.common.ResponseVO;
 import cr.onion.common.util.ResponseUtils;
 import cr.onion.entity.TopicCategory;
 import cr.onion.repo.TopicCategoryAutoRepo;
-import cr.onion.web.controller.mo.TopicCategoryMO;
+import cr.onion.web.controller.vo.TopicCategoryVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
@@ -22,34 +22,34 @@ public class TopicCategoryRestController {
     private TopicCategoryAutoRepo topicCategoryAutoRepo;
 
     @GetMapping
-    public ResponseMO list() {
+    public ResponseVO list() {
         List<TopicCategory> categories = topicCategoryAutoRepo.findAll();
         return ResponseUtils.success("", categories);
     }
 
     @PostMapping
-    public ResponseMO add(@RequestBody @Valid TopicCategoryMO categoryMO) {
+    public ResponseVO add(@RequestBody @Valid TopicCategoryVO categoryVO) {
         TopicCategory category = new TopicCategory();
-        category.setName(categoryMO.getName());
-        category.setSort(categoryMO.getSort());
+        category.setName(categoryVO.getName());
+        category.setSort(categoryVO.getSort());
         topicCategoryAutoRepo.save(category);
         return ResponseUtils.success();
     }
 
     @PutMapping("/{id}")
-    public ResponseMO update(@RequestBody @Valid TopicCategoryMO categoryMO, @PathVariable("id") String id) {
+    public ResponseVO update(@RequestBody @Valid TopicCategoryVO categoryVO, @PathVariable("id") String id) {
         TopicCategory category = topicCategoryAutoRepo.findOne(id);
         if (category == null) {
             return ResponseUtils.error("记录不存在");
         }
-        category.setName(categoryMO.getName());
-        category.setSort(categoryMO.getSort());
+        category.setName(categoryVO.getName());
+        category.setSort(categoryVO.getSort());
         topicCategoryAutoRepo.save(category);
         return ResponseUtils.success();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseMO delete(@PathVariable(name = "id") String id) {
+    public ResponseVO delete(@PathVariable(name = "id") String id) {
         if (StringUtils.isEmpty(id)) {
             return ResponseUtils.error("id不能为空");
         }

@@ -1,11 +1,11 @@
-package cr.onion.web.controller.mo;
+package cr.onion.web.controller.vo;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * @author Beldon.
  */
-public class TopicMO {
+public class TopicVO {
     /**
      * 标题
      */

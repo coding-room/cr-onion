@@ -7,9 +7,7 @@ import cr.onion.entity.Topic;
 import cr.onion.entity.User;
 import cr.onion.repo.TopicAutoRepo;
 import cr.onion.repo.UserAutoRepo;
-import cr.onion.web.controller.mo.UserMO;
-import cr.onion.web.security.Authentication;
-import cr.onion.web.security.SecurityContextHolder;
+import cr.onion.web.controller.vo.UserVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -43,13 +41,13 @@ public class OnionVariable extends BaseVariable {
         return RelativeDateFormat.format(date);
     }
 
-    public UserMO currentUser() {
+    public UserVO currentUser() {
         return user(currentUserId());
     }
 
-    public UserMO user(String userId) {
+    public UserVO user(String userId) {
         User user = userAutoRepo.findOne(userId);
-        UserMO userMO = new UserMO();
+        UserVO userMO = new UserVO();
         if (user != null) {
             BeanUtils.copyProperties(user, userMO);
         }

@@ -7,7 +7,7 @@ import cr.onion.repo.TopicAutoRepo;
 import cr.onion.repo.TopicCategoryAutoRepo;
 import cr.onion.web.MockUtils;
 import cr.onion.web.controller.BaseControllerTest;
-import cr.onion.web.controller.mo.TopicMO;
+import cr.onion.web.controller.vo.TopicVO;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -49,7 +49,7 @@ public class TopicRestControllerTest extends BaseControllerTest {
 
     @Test
     public void add() throws Exception {
-        TopicMO topicMO = new TopicMO();
+        TopicVO topicMO = new TopicVO();
         topicMO.setTitle("這是我的帖子");
         topicMO.setContent("帖子内容");
         topicMO.setCategoryId(category.getId());
@@ -72,7 +72,7 @@ public class TopicRestControllerTest extends BaseControllerTest {
         Assert.assertEquals(1, topics.size());
         Topic topic = topics.get(0);
 
-        TopicMO topicMO = new TopicMO();
+        TopicVO topicMO = new TopicVO();
         topicMO.setTitle("這是我的帖子2");
         topicMO.setContent("帖子内容2");
         topicMO.setCategoryId(category.getId());
@@ -98,7 +98,7 @@ public class TopicRestControllerTest extends BaseControllerTest {
         Assert.assertEquals(1, topics.size());
         Topic topic = topics.get(0);
 
-        TopicMO topicMO = new TopicMO();
+        TopicVO topicMO = new TopicVO();
         topicMO.setTitle("這是我的帖子2");
         topicMO.setContent("帖子内容2");
         topicMO.setCategoryId(category.getId());

@@ -4,7 +4,7 @@ import cr.onion.entity.TopicCategory;
 import cr.onion.repo.TopicCategoryAutoRepo;
 import cr.onion.web.MockUtils;
 import cr.onion.web.controller.BaseControllerTest;
-import cr.onion.web.controller.mo.TopicCategoryMO;
+import cr.onion.web.controller.vo.TopicCategoryVO;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -30,7 +30,7 @@ public class TopicCategoryRestControllerTest extends BaseControllerTest {
 
     @Test
     public void add() throws Exception {
-        TopicCategoryMO topicCategoryMO = new TopicCategoryMO();
+        TopicCategoryVO topicCategoryMO = new TopicCategoryVO();
         topicCategoryMO.setName("分类名字");
         topicCategoryMO.setSort(1);
 
@@ -50,7 +50,7 @@ public class TopicCategoryRestControllerTest extends BaseControllerTest {
         add();
         List<TopicCategory> topicCategories = topicCategoryAutoRepo.findAll();
         TopicCategory category = topicCategories.get(0);
-        TopicCategoryMO topicCategoryMO = new TopicCategoryMO();
+        TopicCategoryVO topicCategoryMO = new TopicCategoryVO();
         topicCategoryMO.setName("分类名字22");
         topicCategoryMO.setSort(2);
 

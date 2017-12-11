@@ -4,8 +4,8 @@ import cr.onion.domain.UserDomain;
 import cr.onion.entity.User;
 import cr.onion.repo.UserAutoRepo;
 import cr.onion.web.MockUtils;
-import cr.onion.web.controller.mo.LoginMO;
-import cr.onion.web.controller.mo.RegisterMO;
+import cr.onion.web.controller.vo.LoginVO;
+import cr.onion.web.controller.vo.RegisterVO;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.runner.RunWith;
@@ -48,7 +48,7 @@ public abstract class BaseControllerTest {
     }
 
     protected String registerUser(String account, String password) throws Exception {
-        RegisterMO registerMO = new RegisterMO();
+        RegisterVO registerMO = new RegisterVO();
         registerMO.setAccount(account);
         registerMO.setPassword(password);
 
@@ -68,7 +68,7 @@ public abstract class BaseControllerTest {
     }
 
     protected void userLogin(String account, String password) throws Exception {
-        LoginMO loginMO = new LoginMO();
+        LoginVO loginMO = new LoginVO();
         loginMO.setAccount(account);
         loginMO.setPassword(password);
         mockMvc.perform(MockUtils.populatePostBuilder("/user/login", loginMO))

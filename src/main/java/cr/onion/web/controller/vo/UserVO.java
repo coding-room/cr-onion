@@ -1,4 +1,4 @@
-package cr.onion.web.controller.mo;
+package cr.onion.web.controller.vo;
 
 import java.util.Date;
 
@@ -6,7 +6,7 @@ import java.util.Date;
  * @author Beldon
  * @create 2017-12-06 下午3:14
  */
-public class UserMO {
+public class UserVO {
     /**
      * 账号
      */

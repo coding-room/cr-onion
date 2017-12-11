@@ -1,14 +1,14 @@
 package cr.onion.web.controller.front.rest;
 
 import cr.onion.common.BaseController;
-import cr.onion.common.ResponseMO;
+import cr.onion.common.ResponseVO;
 import cr.onion.common.util.ResponseUtils;
 import cr.onion.domain.TopicDomain;
 import cr.onion.entity.Topic;
 import cr.onion.entity.TopicCategory;
 import cr.onion.repo.TopicAutoRepo;
 import cr.onion.repo.TopicCategoryAutoRepo;
-import cr.onion.web.controller.mo.TopicMO;
+import cr.onion.web.controller.vo.TopicVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,15 +29,15 @@ public class TopicRestController extends BaseController {
     private TopicAutoRepo topicAutoRepo;
 
     @PostMapping
-    public ResponseMO add(@RequestBody @Valid TopicMO topicMO) {
-        TopicCategory category = topicCategoryAutoRepo.findOne(topicMO.getCategoryId());
+    public ResponseVO add(@RequestBody @Valid TopicVO topicVO) {
+        TopicCategory category = topicCategoryAutoRepo.findOne(topicVO.getCategoryId());
         if (category == null) {
             return ResponseUtils.error("分类信息不存在");
         }
 
         Topic topic = new Topic();
-        topic.setTitle(topicMO.getTitle());
-        topic.setContent(topicMO.getContent());
+        topic.setTitle(topicVO.getTitle());
+        topic.setContent(topicVO.getContent());
         topic.setCategory(category);
         topic.setCreated(new Date());
         topic.setUser(currentUser());
@@ -46,7 +46,7 @@ public class TopicRestController extends BaseController {
     }
 
     @PutMapping("/{id}")
-    public ResponseMO update(@PathVariable("id") String id, @RequestBody @Valid TopicMO topicMO) {
+    public ResponseVO update(@PathVariable("id") String id, @RequestBody @Valid TopicVO topicVO) {
         Topic topic = topicAutoRepo.findOne(id);
         if (topic == null) {
             return ResponseUtils.error("记录不存在");
@@ -55,19 +55,19 @@ public class TopicRestController extends BaseController {
         if (!domain.isOwner(currentUserId())) {
             return ResponseUtils.error("记录不存在");
         }
-        TopicCategory category = topicCategoryAutoRepo.findOne(topicMO.getCategoryId());
+        TopicCategory category = topicCategoryAutoRepo.findOne(topicVO.getCategoryId());
         if (category == null) {
             return ResponseUtils.error("分类信息不存在");
         }
-        topic.setTitle(topicMO.getTitle());
-        topic.setContent(topicMO.getContent());
+        topic.setTitle(topicVO.getTitle());
+        topic.setContent(topicVO.getContent());
         topic.setCategory(category);
         topicAutoRepo.save(topic);
         return ResponseUtils.success();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseMO delete(@PathVariable("id") String id) {
+    public ResponseVO delete(@PathVariable("id") String id) {
         Topic topic = topicAutoRepo.findOne(id);
         if (topic == null) {
             return ResponseUtils.error("记录不存在");

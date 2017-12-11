@@ -3,7 +3,7 @@ package cr.onion.common;
 /**
  * @author Beldon.
  */
-public class ResponseMO {
+public class ResponseVO {
     private int code;
     private String msg;
     private Object data;

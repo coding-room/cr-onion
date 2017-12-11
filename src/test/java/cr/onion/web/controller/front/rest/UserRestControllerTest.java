@@ -3,7 +3,7 @@ package cr.onion.web.controller.front.rest;
 import cr.onion.common.CommonConstant;
 import cr.onion.web.MockUtils;
 import cr.onion.web.controller.BaseControllerTest;
-import cr.onion.web.controller.mo.LoginMO;
+import cr.onion.web.controller.vo.LoginVO;
 import org.junit.Test;
 import org.mockito.internal.matchers.CompareEqual;
 
@@ -25,7 +25,7 @@ public class UserRestControllerTest extends BaseControllerTest {
     @Test
     public void login() throws Exception {
         String userId = registerUser();
-        LoginMO loginMO = new LoginMO();
+        LoginVO loginMO = new LoginVO();
         loginMO.setAccount(account);
         loginMO.setPassword(password);
         mockMvc.perform(MockUtils.populatePostBuilder("/user/login", loginMO))

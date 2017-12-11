@@ -1,17 +1,12 @@
 package cr.onion.web.security;
 
-import cr.onion.common.ResponseMO;
+import cr.onion.common.ResponseVO;
 import cr.onion.common.util.ResponseUtils;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Beldon
@@ -27,7 +22,7 @@ public class AuthorizationAdvice implements MethodInterceptor {
         if (authentication == null) {
             log.info("no login!");
             Class returnType = invocation.getMethod().getReturnType();
-            if (returnType.isAssignableFrom(ResponseMO.class)) {
+            if (returnType.isAssignableFrom(ResponseVO.class)) {
                 return ResponseUtils.error("no login!");
             }else{
                 return "redirect:/user/login";

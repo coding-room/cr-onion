@@ -1,13 +1,13 @@
 package cr.onion.web.controller.front.rest;
 
 import cr.onion.common.CommonConstant;
-import cr.onion.common.ResponseMO;
+import cr.onion.common.ResponseVO;
 import cr.onion.common.util.ResponseUtils;
 import cr.onion.domain.UserDomain;
 import cr.onion.entity.User;
 import cr.onion.repo.UserAutoRepo;
-import cr.onion.web.controller.mo.LoginMO;
-import cr.onion.web.controller.mo.RegisterMO;
+import cr.onion.web.controller.vo.LoginVO;
+import cr.onion.web.controller.vo.RegisterVO;
 import cr.onion.web.security.SecurityContextHolder;
 import cr.onion.web.security.remember.RememberMeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,10 +31,10 @@ public class UserRestController {
     private RememberMeService rememberMeService;
 
     @PostMapping("/register")
-    public ResponseMO register(@RequestBody @Valid RegisterMO registerMO) {
+    public ResponseVO register(@RequestBody @Valid RegisterVO registerVO) {
         User user = new User();
-        user.setAccount(registerMO.getAccount());
-        user.setPassword(registerMO.getPassword());
+        user.setAccount(registerVO.getAccount());
+        user.setPassword(registerVO.getPassword());
         UserDomain domain = new UserDomain(user);
         if (domain.isExist()) {
             return ResponseUtils.error("用户名已存在");
@@ -44,14 +44,14 @@ public class UserRestController {
     }
 
     @PostMapping("/login")
-    public ResponseMO login(@RequestBody @Valid LoginMO loginMO, HttpServletRequest request
+    public ResponseVO login(@RequestBody @Valid LoginVO loginVO, HttpServletRequest request
             , HttpServletResponse response) {
-        User user = userAutoRepo.findByAccount(loginMO.getAccount());
+        User user = userAutoRepo.findByAccount(loginVO.getAccount());
         if (user == null) {
             return ResponseUtils.error("用户不存在");
         }
         UserDomain domain = new UserDomain(user);
-        if (!domain.checkPassword(loginMO.getPassword())) {
+        if (!domain.checkPassword(loginVO.getPassword())) {
             return ResponseUtils.error("密码错误");
         }
         request.getSession().setAttribute(CommonConstant.Session.USER_ID, user.getId());
@@ -60,7 +60,7 @@ public class UserRestController {
     }
 
     @PostMapping("/logout")
-    public ResponseMO logout(HttpServletRequest request, HttpServletResponse response) {
+    public ResponseVO logout(HttpServletRequest request, HttpServletResponse response) {
         rememberMeService.logout(request, response);
         SecurityContextHolder.removeAuthentication();
         request.getSession().removeAttribute(CommonConstant.Session.AUTHENTICATION);
