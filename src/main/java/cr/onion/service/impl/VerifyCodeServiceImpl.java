@@ -4,6 +4,7 @@ import com.google.code.kaptcha.impl.DefaultKaptcha;
 import cr.onion.service.VerifyCodeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
@@ -20,15 +21,10 @@ import java.awt.image.BufferedImage;
 @Service
 public class VerifyCodeServiceImpl implements VerifyCodeService{
 
-    private final DefaultKaptcha defaultKaptcha;
-
-    private final String sessionKeyValue;
-
     @Autowired
-    public VerifyCodeServiceImpl(DefaultKaptcha defaultKaptcha) {
-        this.defaultKaptcha = defaultKaptcha;
-        this.sessionKeyValue = defaultKaptcha.getConfig().getSessionKey();
-    }
+    private DefaultKaptcha defaultKaptcha;
+
+    private final String sessionKeyValue = defaultKaptcha.getConfig().getSessionKey();
 
     @Override
     public void generate(HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -42,5 +38,12 @@ public class VerifyCodeServiceImpl implements VerifyCodeService{
         BufferedImage bi = defaultKaptcha.createImage(capText);
         ServletOutputStream out = response.getOutputStream();
         ImageIO.write(bi, "jpg", out);
+    }
+
+    @Override
+    public Boolean checkVerifyCode(HttpServletRequest request, String verifyCode) {
+        String rightVerifyCode = (String) request.getSession().getAttribute(sessionKeyValue);
+        if (rightVerifyCode == null) return false;
+        return rightVerifyCode.equals(verifyCode);
     }
 }

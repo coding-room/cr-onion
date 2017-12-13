@@ -16,12 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class IndexController extends BaseFrontController {
 
-    private final VerifyCodeService verifyCodeService;
-
     @Autowired
-    public IndexController(VerifyCodeService verifyCodeService) {
-        this.verifyCodeService = verifyCodeService;
-    }
+    private VerifyCodeService verifyCodeService;
 
     @GetMapping({"/", "/index"})
     public String index() {

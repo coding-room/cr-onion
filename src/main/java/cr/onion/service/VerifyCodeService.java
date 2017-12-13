@@ -12,4 +12,12 @@ public interface VerifyCodeService {
      * @throws Exception
      */
     void generate(HttpServletRequest request, HttpServletResponse response) throws Exception;
+
+    /**
+     * 校验验证码
+     * @param request
+     * @param verifyCode
+     * @return
+     */
+    Boolean checkVerifyCode(HttpServletRequest request, String verifyCode);
 }
