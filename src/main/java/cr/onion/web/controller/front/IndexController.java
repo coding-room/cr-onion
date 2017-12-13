@@ -1,7 +1,8 @@
 package cr.onion.web.controller.front;
 
 import cr.onion.common.BaseFrontController;
-import cr.onion.common.util.VerifyCodeUtils;
+import cr.onion.service.VerifyCodeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,15 +16,22 @@ import javax.servlet.http.HttpServletResponse;
 @Controller
 public class IndexController extends BaseFrontController {
 
+    private final VerifyCodeService verifyCodeService;
+
+    @Autowired
+    public IndexController(VerifyCodeService verifyCodeService) {
+        this.verifyCodeService = verifyCodeService;
+    }
+
     @GetMapping({"/", "/index"})
-    public String index(HttpServletRequest request, HttpServletResponse response) {
+    public String index() {
         return getTemplate("index");
     }
 
     @GetMapping("/verifycode")
     public void verifyCode(HttpServletRequest request, HttpServletResponse response) {
         try {
-            VerifyCodeUtils.generateVerifyCode(request, response);
+            verifyCodeService.generate(request, response);
         } catch (Exception e) {
             e.printStackTrace();
         }

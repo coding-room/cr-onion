@@ -1,8 +1,9 @@
-package cr.onion.common.util;
+package cr.onion.service.impl;
 
 import com.google.code.kaptcha.impl.DefaultKaptcha;
+import cr.onion.service.VerifyCodeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
@@ -16,20 +17,21 @@ import java.awt.image.BufferedImage;
  * @Author TDKnight
  * @Date 2017/12/11
  */
-@Component
-public class VerifyCodeUtils {
+@Service
+public class VerifyCodeServiceImpl implements VerifyCodeService{
 
-    private static DefaultKaptcha defaultKaptcha;
+    private final DefaultKaptcha defaultKaptcha;
 
-    private static String sessionKeyValue;
+    private final String sessionKeyValue;
 
     @Autowired
-    public VerifyCodeUtils(DefaultKaptcha defaultKaptcha) {
+    public VerifyCodeServiceImpl(DefaultKaptcha defaultKaptcha) {
         this.defaultKaptcha = defaultKaptcha;
         this.sessionKeyValue = defaultKaptcha.getConfig().getSessionKey();
     }
 
-    public static void generateVerifyCode(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    @Override
+    public void generate(HttpServletRequest request, HttpServletResponse response) throws Exception {
         response.setDateHeader("Expires", 0L);
         response.setHeader("Cache-Control", "no-store, no-cache, must-revalidate");
         response.addHeader("Cache-Control", "post-check=0, pre-check=0");
