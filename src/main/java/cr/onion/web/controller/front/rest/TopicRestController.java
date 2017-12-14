@@ -79,4 +79,38 @@ public class TopicRestController extends BaseController {
         topicAutoRepo.delete(topic);
         return ResponseUtils.success();
     }
+
+    @PostMapping("/top/{id}")
+    public ResponseVO top(@PathVariable("id") String id) {
+        Topic topic = topicAutoRepo.findOne(id);
+        if (topic == null) {
+            return ResponseUtils.error("记录不存在");
+        }
+        topic.setTop(!topic.isTop());
+        topicAutoRepo.save(topic);
+        return ResponseUtils.success();
+    }
+
+    @PostMapping("/lock/{id}")
+    public ResponseVO lock(@PathVariable("id") String id) {
+        Topic topic = topicAutoRepo.findOne(id);
+        if (topic == null) {
+            return ResponseUtils.error("记录不存在");
+        }
+        topic.setLock(!topic.isLock());
+        topicAutoRepo.save(topic);
+        return ResponseUtils.success();
+    }
+
+    @PostMapping("/good/{id}")
+    public ResponseVO good(@PathVariable("id") String id) {
+        Topic topic = topicAutoRepo.findOne(id);
+        if (topic == null) {
+            return ResponseUtils.error("记录不存在");
+        }
+        topic.setGood(!topic.isGood());
+        topicAutoRepo.save(topic);
+        return ResponseUtils.success();
+    }
+
 }

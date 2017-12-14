@@ -110,4 +110,72 @@ public class TopicRestControllerTest extends BaseControllerTest {
         topics = topicAutoRepo.findAll();
         Assert.assertEquals(0, topics.size());
     }
+
+    @Test
+    public void top() throws Exception {
+        add();
+        List<Topic> topics = topicAutoRepo.findAll();
+        Assert.assertEquals(1, topics.size());
+        Topic topic = topics.get(0);
+
+        TopicVO topicMO = new TopicVO();
+        topicMO.setTitle("這是我的帖子2");
+        topicMO.setContent("帖子内容2");
+        topicMO.setCategoryId(category.getId());
+
+        mockMvc.perform(MockUtils.populatePostBuilder("/topic/top/" + topic.getId(), null).sessionAttr(CommonConstant.Session.USER_ID, userId))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.code").value("0"));
+
+        topics = topicAutoRepo.findAll();
+        Assert.assertEquals(1, topics.size());
+        Topic topic1 = topics.get(0);
+        Assert.assertTrue(topic1.isTop());
+
+    }
+
+
+    @Test
+    public void lock() throws Exception {
+        add();
+        List<Topic> topics = topicAutoRepo.findAll();
+        Assert.assertEquals(1, topics.size());
+        Topic topic = topics.get(0);
+
+        TopicVO topicMO = new TopicVO();
+        topicMO.setTitle("這是我的帖子2");
+        topicMO.setContent("帖子内容2");
+        topicMO.setCategoryId(category.getId());
+
+        mockMvc.perform(MockUtils.populatePostBuilder("/topic/lock/" + topic.getId(), null).sessionAttr(CommonConstant.Session.USER_ID, userId))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.code").value("0"));
+
+        topics = topicAutoRepo.findAll();
+        Assert.assertEquals(1, topics.size());
+        Topic topic1 = topics.get(0);
+        Assert.assertTrue(topic1.isLock());
+    }
+
+    @Test
+    public void good() throws Exception {
+        add();
+        List<Topic> topics = topicAutoRepo.findAll();
+        Assert.assertEquals(1, topics.size());
+        Topic topic = topics.get(0);
+
+        TopicVO topicMO = new TopicVO();
+        topicMO.setTitle("這是我的帖子2");
+        topicMO.setContent("帖子内容2");
+        topicMO.setCategoryId(category.getId());
+
+        mockMvc.perform(MockUtils.populatePostBuilder("/topic/good/" + topic.getId(), null).sessionAttr(CommonConstant.Session.USER_ID, userId))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.code").value("0"));
+
+        topics = topicAutoRepo.findAll();
+        Assert.assertEquals(1, topics.size());
+        Topic topic1 = topics.get(0);
+        Assert.assertTrue(topic1.isGood());
+    }
 }
